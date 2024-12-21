@@ -1,10 +1,21 @@
-import { useCallback, useState } from 'react'
+import  { useCallback, useState } from 'react'
 import { TodoList } from '@features/todo-list/ui/TodoList'
 import { TodoForm } from '@features/todo-create/ui/TodoForm'
+import {useTodoList } from "@entities/todo/hooks/useTodoList.js";
+import React from 'react'
 
 export const TodoApp = () => {
    // 1. Initialize todos state
-   const [todos, setTodos] = useState([])
+   const {
+    todos,
+    fetchTodos
+  } = useTodoList()
+
+
+  React.useEffect(() => {
+    fetchTodos()
+  }, [])
+
 
    // 2. Create handler for adding todos
   const handleSubmit = useCallback((title) => {
@@ -13,14 +24,11 @@ export const TodoApp = () => {
       title: title.title,
       completed: false
     }
-    setTodos(prev => [...prev, newTodo])
   }, [])
 
    // 3. Create handler for toggling todos
    const handleToggle = useCallback((id) => {
-    setTodos(prev => prev.map(todo => 
-      todo.id === id ? { ...todo, completed: !todo.completed } : todo
-    ))
+  
   }, [])
 
     // 4. Create handler for deleting todos
