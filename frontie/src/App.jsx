@@ -1,15 +1,15 @@
-import { useState } from 'react'
-
-import {TodoApp} from "@widgets/todo/ui/TodoApp.jsx";
+import { useState } from 'react';
+import { RouterProvider } from 'react-router-dom';
+import { router } from '../app/router';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
 
   return (
     <>
-      <TodoApp />
+      <RouterProvider router={router} />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
